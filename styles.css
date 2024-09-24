@@ -1,0 +1,240 @@
+/* styles.css */
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header, main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1, h2, h3, h4 {
+  color: #333;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 22px;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 16px;
+}
+
+/* Header Styles */
+header p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+header ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+header ul li {
+  margin-bottom: 5px;
+}
+
+/* Factors Container Styles */
+.factors-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.factors-column {
+  flex: 1 1 45%;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.factors-column h2 {
+  text-align: center;
+}
+
+/* Factor Styles */
+.factor {
+  margin-bottom: 20px;
+}
+
+.factor label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slider {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.factor input[type="number"] {
+  width: 70px;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.tooltip:hover {
+  color: #007bff;
+}
+
+/* Slider Size Adjustments */
+.noUi-target {
+  height: 8px;
+}
+
+.noUi-handle {
+  width: 16px;
+  height: 16px;
+  top: -4px;
+}
+
+.noUi-tooltip {
+  font-size: 12px;
+}
+
+/* Positive Slider Styles */
+.positive-slider .noUi-connect {
+  background: #28a745;
+}
+
+.positive-slider .noUi-handle {
+  border: 2px solid #28a745;
+}
+
+.positive-slider .noUi-tooltip {
+  background: #28a745;
+  color: #fff;
+}
+
+/* Negative Slider Styles */
+.negative-slider .noUi-connect {
+  background: #ffc107;
+}
+
+.negative-slider .noUi-handle {
+  border: 2px solid #ffc107;
+}
+
+.negative-slider .noUi-tooltip {
+  background: #ffc107;
+  color: #333;
+}
+
+/* Button Styles */
+#compute-score {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+}
+
+#compute-score:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Results Section Styles */
+#results {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#forgiveness-score {
+  font-size: 48px;
+  font-weight: bold;
+  color: #007bff; /* Blue color */
+}
+
+#score-interpretation {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #555;
+}
+
+#detailed-report {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#detailed-report h3 {
+  margin-bottom: 10px;
+}
+
+#detailed-report p {
+  font-size: 16px;
+}
+
+#detailed-report ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#detailed-report li {
+  margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .factors-container {
+    flex-direction: column;
+  }
+
+  .factors-column {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
+
+  #compute-score {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .factor {
+    margin-bottom: 20px;
+  }
+
+  .slider-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slider {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  #compute-score {
+    width: 100%;
+  }
+}
