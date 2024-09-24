@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{wasysym} % Added for the \Info symbol
+\usepackage[utf8]{inputenc} % Ensures UTF-8 encoding is used
+
+\setlength{\headheight}{13.6pt} % Adjusted to eliminate warnings
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Forgiveness Score Calculator User Guide}
+\rhead{\thepage}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0em}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Forgiveness Score Calculator User Guide}}
+\end{center}
+
+\section*{Introduction}
+
+The \textbf{Forgiveness Score Calculator} is an interactive web application designed to help you assess your current level of forgiveness by considering various positive and negative factors. By adjusting sliders and input fields, you can personalize the factors based on your experiences and emotions. The calculator provides a forgiveness score percentage along with detailed recommendations to improve your forgiveness journey.
+
+\section*{Getting Started}
+
+\subsection*{Accessing the Application}
+
+\begin{enumerate}
+    \item \textbf{Open the Application:}
+    \begin{itemize}
+        \item Locate the \texttt{index.html} file in your project directory.
+        \item Open the file using a modern web browser (e.g., Chrome, Firefox, Safari, or Edge).
+        \item \textit{Note:} Ensure that the \texttt{styles.css} and \texttt{script.js} files are in the same directory as \texttt{index.html} or correctly linked.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Understanding the Interface}
+
+The application interface is divided into several key sections:
+
+\begin{enumerate}
+    \item \textbf{Header:}
+    \begin{itemize}
+        \item Displays the title \textbf{``Forgiveness Score Calculator''}.
+        \item Provides brief instructions on using the sliders and input fields.
+    \end{itemize}
+    \item \textbf{Main Content:}
+    \begin{itemize}
+        \item \textbf{Positive Factors Column (Left Side):}
+        \begin{itemize}
+            \item Contains factors that contribute positively to forgiveness.
+        \end{itemize}
+        \item \textbf{Negative Factors Column (Right Side):}
+        \begin{itemize}
+            \item Contains factors that may hinder forgiveness.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Compute Button:}
+    \begin{itemize}
+        \item The \textbf{``Compute Forgiveness Score''} button located below the factors.
+    \end{itemize}
+    \item \textbf{Results Section:}
+    \begin{itemize}
+        \item Displays your forgiveness score percentage.
+        \item Provides an interpretation of your score.
+        \item Includes a detailed report with recommendations.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Using the Calculator}
+
+\subsection*{1. Adjusting Factors}
+
+Each factor consists of:
+
+\begin{itemize}
+    \item \textbf{Label and Tooltip:}
+    \begin{itemize}
+        \item The factor's name and a brief description (hover over the \textbf{\Info} icon).
+    \end{itemize}
+    \item \textbf{Value Slider and Input:}
+    \begin{itemize}
+        \item \textbf{Slider:} Adjusts the intensity or presence of the factor on a scale from 0 to 10.
+        \item \textbf{Number Input:} You can type a specific value if preferred.
+    \end{itemize}
+    \item \textbf{Weight Slider and Input:}
+    \begin{itemize}
+        \item \textbf{Slider:} Adjusts the importance or impact of the factor on a scale from 0 to 1.
+        \item \textbf{Number Input:} You can type a specific weight if preferred.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Steps to Adjust Factors:}
+
+\begin{enumerate}
+    \item \textbf{Identify the Factor:}
+    \begin{itemize}
+        \item Review the factor's name and description to understand its relevance to you.
+    \end{itemize}
+    \item \textbf{Set the Value:}
+    \begin{itemize}
+        \item \textbf{Use the Slider:}
+        \begin{itemize}
+            \item Click and drag the slider handle to adjust the value.
+            \item The current value is displayed in a tooltip above the slider and updated in the number input.
+        \end{itemize}
+        \item \textbf{Or Enter a Number:}
+        \begin{itemize}
+            \item Click the number input field next to the slider.
+            \item Type a value between \textbf{0} (not present) and \textbf{10} (strongly present).
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Set the Weight:}
+    \begin{itemize}
+        \item \textbf{Use the Slider:}
+        \begin{itemize}
+            \item Adjust the slider to set how much this factor should influence your score.
+            \item The weight ranges from \textbf{0} (no influence) to \textbf{1} (full influence).
+        \end{itemize}
+        \item \textbf{Or Enter a Number:}
+        \begin{itemize}
+            \item Type a weight value between \textbf{0} and \textbf{1} in the number input field.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Repeat for Each Factor:}
+    \begin{itemize}
+        \item Go through all the positive and negative factors, adjusting values and weights according to your personal assessment.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{2. Computing Your Forgiveness Score}
+
+Once you've adjusted all the factors:
+
+\begin{enumerate}
+    \item \textbf{Click the Compute Button:}
+    \begin{itemize}
+        \item Locate the \textbf{``Compute Forgiveness Score''} button below the factors.
+        \item Click the button to calculate your score.
+    \end{itemize}
+    \item \textbf{View Your Results:}
+    \begin{itemize}
+        \item The \textbf{Results Section} will display:
+        \begin{itemize}
+            \item \textbf{Forgiveness Score Percentage:} Shows your overall forgiveness level.
+            \item \textbf{Score Interpretation:} Provides a brief insight into your score (e.g., high, moderate, or low level of forgiveness).
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\section*{Understanding Your Results}
+
+\subsection*{1. Forgiveness Score Percentage}
+
+\begin{itemize}
+    \item \textbf{Score Range:} 0\% to 100\%.
+    \item \textbf{Interpretation:}
+    \begin{itemize}
+        \item \textbf{80\% to 100\%:} High level of forgiveness.
+        \item \textbf{50\% to 79\%:} Moderate level of forgiveness.
+        \item \textbf{Below 50\%:} Low level of forgiveness.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{2. Detailed Report}
+
+After computing your score, a \textbf{Detailed Report} is generated, which includes:
+
+\begin{itemize}
+    \item \textbf{Summary:}
+    \begin{itemize}
+        \item Reiterates your forgiveness score percentage.
+    \end{itemize}
+    \item \textbf{Recommendations to Improve Your Forgiveness Score:}
+    \begin{itemize}
+        \item \textbf{Top Negative Factors to Reduce:}
+        \begin{itemize}
+            \item Lists up to three negative factors that most significantly impact your score.
+            \item Provides specific advice on how to address each factor.
+        \end{itemize}
+        \item \textbf{Top Positive Factors to Enhance:}
+        \begin{itemize}
+            \item Lists up to three positive factors that could be improved.
+            \item Offers suggestions to strengthen these factors.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section*{Tips for Using the Calculator}
+
+\begin{itemize}
+    \item \textbf{Be Honest with Yourself:}
+    \begin{itemize}
+        \item For the most accurate assessment, reflect deeply on each factor and how it applies to you.
+    \end{itemize}
+    \item \textbf{Adjusting Factors Over Time:}
+    \begin{itemize}
+        \item Revisit the calculator periodically to track your progress in forgiveness.
+    \end{itemize}
+    \item \textbf{Understanding Values and Weights:}
+    \begin{itemize}
+        \item \textbf{Values:} Represent the degree to which each factor is present in your life.
+        \item \textbf{Weights:} Indicate how important each factor is to your overall forgiveness.
+    \end{itemize}
+    \item \textbf{Use the Recommendations:}
+    \begin{itemize}
+        \item Consider implementing the advice provided to enhance your forgiveness journey.
+    \end{itemize}
+\end{itemize}
+
+\section*{Additional Information}
+
+\begin{itemize}
+    \item \textbf{Tooltips for Guidance:}
+    \begin{itemize}
+        \item Hover over the \textbf{\Info} icon next to each factor to read a brief description.
+    \end{itemize}
+    \item \textbf{Responsive Design:}
+    \begin{itemize}
+        \item The application is designed to work on various screen sizes, including tablets and smartphones.
+    \end{itemize}
+    \item \textbf{No Data Storage:}
+    \begin{itemize}
+        \item Your inputs are not stored or transmitted; they remain in your browser session.
+    \end{itemize}
+\end{itemize}
+
+\section*{Conclusion}
+
+The Forgiveness Score Calculator is a personal tool to help you understand and improve your capacity for forgiveness. By thoughtfully engaging with each factor and considering the recommendations, you can take meaningful steps toward personal growth and emotional well-being.
+
+\bigskip
+
+\textbf{Enjoy your journey toward greater forgiveness and peace. If you have any questions or need further assistance, feel free to reach out!}
+
+\end{document}
