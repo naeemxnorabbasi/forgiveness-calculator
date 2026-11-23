@@ -1,0 +1,28 @@
+{
+  "name": "AuraForgive — Science-Backed Forgiveness Journey",
+  "short_name": "AuraForgive",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090e17",
+  "theme_color": "#0f766e",
+  "orientation": "portrait-primary",
+  "description": "Calculate, track, and heal emotional resentment with science-backed 15-factor psychological mathematics.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

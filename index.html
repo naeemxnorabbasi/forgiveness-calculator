@@ -1,311 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <title>Forgiveness Score Calculator</title>
-  <!-- Include noUiSlider CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AuraForgive — Science-Backed Forgiveness Journey</title>
+  
+  <!-- PWA & Mobile Meta Tags -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#090e17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AuraForgive">
+  <meta name="description" content="Calculate, heal, and release emotional grudges with peer-reviewed 15-factor restorative psychology. 100% ad-free, private, and local-first.">
+  
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Forgiveness Score Calculator</h1>
-    <!-- Basic Information Section -->
-    <p>Welcome to the Forgiveness Score Calculator. This tool helps you assess your level of forgiveness by considering various positive and negative factors.</p>
-    <p><strong>How to Use:</strong></p>
-    <ul>
-      <li>Adjust the sliders or input fields to set your values and weights for each factor.</li>
-      <li>Positive factors contribute to your forgiveness score, while negative factors may hinder it.</li>
-      <li>Once you've set all the factors, click the <strong>Compute Forgiveness Score</strong> button to see your results.</li>
-    </ul>
+  <!-- Atmospheric Ambient Glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- Global Application Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon">🕊️</span>
+        <div>
+          <h1>AuraForgive</h1>
+          <p class="tagline">Restorative Psychology & Healing Cockpit</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="header-pill pill-privacy" title="All calculations and history stay on your device">🔒 100% Private</span>
+        <span class="header-pill pill-pro" id="pro-status-pill">⚡ Unlock Pro</span>
+        <button class="icon-btn" id="install-app-btn" title="Install App to Device" style="display:none;">📲</button>
+        <button class="icon-btn" id="theme-toggle-btn" title="Toggle Night/Day Theme">🌙</button>
+        <button class="icon-btn" id="export-report-btn" title="Print or Export Clinical PDF">📄</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- Factors Container -->
-    <div class="factors-container">
-      <!-- Positive Factors Column -->
-      <section id="positive-factors" class="factors-column">
-        <h2>Positive Factors</h2>
+  <!-- Main View Container -->
+  <main class="main-container">
 
-        <!-- Pardon (P) -->
-        <div class="factor">
-          <label for="pardon-slider">
-            Pardon (P)
-            <span class="tooltip" title="Letting go of grudges without expecting revenge.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="pardon-slider" class="slider positive-slider"></div>
-            <input type="number" id="pardon-value-num" min="0" max="10" step="0.1" value="5">
+    <!-- Master Live Dashboard Strip (Always Visible) -->
+    <section class="live-dashboard">
+      <div class="dashboard-grid">
+        
+        <!-- Score Hero -->
+        <div class="score-box">
+          <div class="score-meta-label">Forgiveness Score (F)</div>
+          <div class="score-row">
+            <span class="score-percentage" id="live-score-percentage">50.0%</span>
+            <span class="score-badge" id="live-verdict-badge">Moderate</span>
           </div>
-          <label for="pardon-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="pardon-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="pardon-weight-num" min="0" max="1" step="0.1" value="0.5">
+          <p class="score-status-text" id="live-status-caption">Actively processing emotional balance.</p>
+        </div>
+
+        <!-- Burden Meter -->
+        <div class="burden-section">
+          <div class="burden-header">
+            <span>Emotional Burden Level</span>
+            <span id="burden-val-text" style="font-feature-settings: 'tnum';">50%</span>
+          </div>
+          <div class="burden-track">
+            <div class="burden-fill" id="burden-progress-fill"></div>
+          </div>
+          <div class="burden-caption">Percentage of cognitive & somatic energy tied to the grievance.</div>
+        </div>
+
+        <!-- Force Balance Chips -->
+        <div class="math-balance-strip">
+          <div class="math-chip positive-chip">
+            <span style="color:var(--text-muted);">Positive Force (WPS):</span>
+            <span class="val" id="chip-wps-val" style="color:var(--pos-green);">20.0</span>
+          </div>
+          <div class="math-chip negative-chip">
+            <span style="color:var(--text-muted);">Negative Load (WNS):</span>
+            <span class="val" id="chip-wns-val" style="color:var(--alert-rose);">20.0</span>
           </div>
         </div>
 
-        <!-- Reconciliation (R) -->
-        <div class="factor">
-          <label for="reconciliation-slider">
-            Reconciliation (R)
-            <span class="tooltip" title="Mending relationships and finding closure after conflict.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="reconciliation-slider" class="slider positive-slider"></div>
-            <input type="number" id="reconciliation-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="reconciliation-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="reconciliation-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="reconciliation-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Release from Burden (B) -->
-        <div class="factor">
-          <label for="release-slider">
-            Release from Burden (B)
-            <span class="tooltip" title="Liberating oneself from the emotional weight of past hurts and resentments.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="release-slider" class="slider positive-slider"></div>
-            <input type="number" id="release-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="release-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="release-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="release-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Love (L) -->
-        <div class="factor">
-          <label for="love-slider">
-            Love (L)
-            <span class="tooltip" title="The capacity for empathy, compassion, and kindness that can facilitate forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="love-slider" class="slider positive-slider"></div>
-            <input type="number" id="love-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="love-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="love-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="love-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Compassion (C) -->
-        <div class="factor">
-          <label for="compassion-slider">
-            Compassion (C)
-            <span class="tooltip" title="Understanding and sharing another's emotional pain and distress.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="compassion-slider" class="slider positive-slider"></div>
-            <input type="number" id="compassion-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="compassion-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="compassion-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="compassion-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Mindfulness (M) -->
-        <div class="factor">
-          <label for="mindfulness-slider">
-            Mindfulness (M)
-            <span class="tooltip" title="Being present in the moment, aware of one's thoughts, emotions, and physical sensations.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="mindfulness-slider" class="slider positive-slider"></div>
-            <input type="number" id="mindfulness-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="mindfulness-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="mindfulness-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="mindfulness-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Self-Reflection (SR) -->
-        <div class="factor">
-          <label for="self-reflection-slider">
-            Self-Reflection (SR)
-            <span class="tooltip" title="Introspection, self-awareness, and a willingness to examine one's own thoughts, feelings, and behaviors.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="self-reflection-slider" class="slider positive-slider"></div>
-            <input type="number" id="self-reflection-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="self-reflection-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="self-reflection-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="self-reflection-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Personal Growth (PG) -->
-        <div class="factor">
-          <label for="personal-growth-slider">
-            Personal Growth (PG)
-            <span class="tooltip" title="Development of new skills, perspectives, or values that can facilitate forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="personal-growth-slider" class="slider positive-slider"></div>
-            <input type="number" id="personal-growth-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="personal-growth-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="personal-growth-weight-slider" class="slider positive-slider"></div>
-            <input type="number" id="personal-growth-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-      </section>
-
-      <!-- Negative Factors Column -->
-      <section id="negative-factors" class="factors-column">
-        <h2>Negative Factors</h2>
-
-        <!-- Retribution (Re) -->
-        <div class="factor">
-          <label for="retribution-slider">
-            Retribution (Re)
-            <span class="tooltip" title="Desire for revenge or punishment, which can hinder forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="retribution-slider" class="slider negative-slider"></div>
-            <input type="number" id="retribution-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="retribution-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="retribution-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="retribution-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Resentment (Rs) -->
-        <div class="factor">
-          <label for="resentment-slider">
-            Resentment (Rs)
-            <span class="tooltip" title="Feelings of anger, bitterness, and hurt that can prevent forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="resentment-slider" class="slider negative-slider"></div>
-            <input type="number" id="resentment-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="resentment-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="resentment-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="resentment-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Emotional Pain (EP) -->
-        <div class="factor">
-          <label for="emotional-pain-slider">
-            Emotional Pain (EP)
-            <span class="tooltip" title="The pain and distress resulting from holding onto grudges and resentments.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="emotional-pain-slider" class="slider negative-slider"></div>
-            <input type="number" id="emotional-pain-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="emotional-pain-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="emotional-pain-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="emotional-pain-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Self-Destruction (SD) -->
-        <div class="factor">
-          <label for="self-destruction-slider">
-            Self-Destruction (SD)
-            <span class="tooltip" title="Negative impact on one's mental and emotional well-being when failing to forgive oneself or others.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="self-destruction-slider" class="slider negative-slider"></div>
-            <input type="number" id="self-destruction-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="self-destruction-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="self-destruction-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="self-destruction-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Guilt (Gu) -->
-        <div class="factor">
-          <label for="guilt-slider">
-            Guilt (Gu)
-            <span class="tooltip" title="Feelings of regret, remorse, or shame that can prevent forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="guilt-slider" class="slider negative-slider"></div>
-            <input type="number" id="guilt-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="guilt-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="guilt-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="guilt-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Shame (Sh) -->
-        <div class="factor">
-          <label for="shame-slider">
-            Shame (Sh)
-            <span class="tooltip" title="Feelings of humiliation, embarrassment, or unworthiness that can hinder forgiveness.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="shame-slider" class="slider negative-slider"></div>
-            <input type="number" id="shame-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="shame-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="shame-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="shame-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-        <!-- Forgotten Memories (FM) -->
-        <div class="factor">
-          <label for="forgotten-memories-slider">
-            Forgotten Memories (FM)
-            <span class="tooltip" title="Memories of past hurts or traumas that have not been processed or forgiven.">ℹ️</span>
-          </label>
-          <div class="slider-container">
-            <div id="forgotten-memories-slider" class="slider negative-slider"></div>
-            <input type="number" id="forgotten-memories-value-num" min="0" max="10" step="0.1" value="5">
-          </div>
-          <label for="forgotten-memories-weight-slider">Weight:</label>
-          <div class="slider-container">
-            <div id="forgotten-memories-weight-slider" class="slider negative-slider"></div>
-            <input type="number" id="forgotten-memories-weight-num" min="0" max="1" step="0.1" value="0.5">
-          </div>
-        </div>
-
-      </section>
-    </div>
-
-    <!-- Compute Button -->
-    <button id="compute-score">Compute Forgiveness Score</button>
-
-    <!-- Results Section -->
-    <section id="results">
-      <h2>Your Forgiveness Score</h2>
-      <p id="forgiveness-score">--%</p>
-      <p id="score-interpretation"></p>
-      <!-- Detailed Report -->
-      <section id="detailed-report"></section>
+      </div>
     </section>
+
+    <!-- Navigation Tabs Bar -->
+    <nav class="view-tabs-bar">
+      <button class="tab-button active" data-tab="simple">
+        <span>⚡ Quick Assessment</span>
+        <span class="tab-badge">Free</span>
+      </button>
+      <button class="tab-button" data-tab="pro">
+        <span>🎛️ Master Cockpit</span>
+        <span class="tab-badge">15 Factors</span>
+      </button>
+      <button class="tab-button" data-tab="radar">
+        <span>📊 Radar Map</span>
+      </button>
+      <button class="tab-button" data-tab="history">
+        <span>🧭 Journey History</span>
+      </button>
+    </nav>
+
+    <!-- TAB 1: SIMPLE ASSESSMENT (FREE TIER) -->
+    <section id="tab-simple" class="tab-content active">
+      <div class="view-header">
+        <h2>Intuitive 5-Dimension Check</h2>
+        <p>A gentle 2-minute reflection. Your answers automatically calibrate the underlying clinical 15-factor model.</p>
+      </div>
+
+      <div class="simple-questions-list">
+        
+        <!-- Question 1: Resentment -->
+        <div class="question-card">
+          <div class="q-badge-row">
+            <span class="q-number">1</span>
+            <span class="q-category neg">Friction</span>
+          </div>
+          <div class="q-body">
+            <h3>Resentment & Payback</h3>
+            <p>Are you holding onto anger, bitterness, or retaliatory fantasies?</p>
+          </div>
+          <div class="slider-container">
+            <div class="slider-labels-row">
+              <span>0 (Completely at peace)</span>
+              <span>10 (Burning anger)</span>
+            </div>
+            <div class="slider-track-row">
+              <input type="range" id="sq-resentment" min="0" max="10" step="0.1" value="5" class="slider-neg">
+              <span class="val-badge" id="sq-resentment-val">5.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2: Pain -->
+        <div class="question-card">
+          <div class="q-badge-row">
+            <span class="q-number">2</span>
+            <span class="q-category neg">Friction</span>
+          </div>
+          <div class="q-body">
+            <h3>Raw Hurt & Pain</h3>
+            <p>How acutely does the memory or betrayal sting when triggered?</p>
+          </div>
+          <div class="slider-container">
+            <div class="slider-labels-row">
+              <span>0 (Scar healed)</span>
+              <span>10 (Open wound)</span>
+            </div>
+            <div class="slider-track-row">
+              <input type="range" id="sq-hurt" min="0" max="10" step="0.1" value="5" class="slider-neg">
+              <span class="val-badge" id="sq-hurt-val">5.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3: Release -->
+        <div class="question-card">
+          <div class="q-badge-row">
+            <span class="q-number">3</span>
+            <span class="q-category pos">Liberation</span>
+          </div>
+          <div class="q-body">
+            <h3>Willingness to Release</h3>
+            <p>Are you ready to let go of the burden for your own health and peace?</p>
+          </div>
+          <div class="slider-container">
+            <div class="slider-labels-row">
+              <span>0 (Holding tightly)</span>
+              <span>10 (Ready to drop it)</span>
+            </div>
+            <div class="slider-track-row">
+              <input type="range" id="sq-release" min="0" max="10" step="0.1" value="5" class="slider-pos">
+              <span class="val-badge" id="sq-release-val">5.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4: Empathy -->
+        <div class="question-card">
+          <div class="q-badge-row">
+            <span class="q-number">4</span>
+            <span class="q-category pos">Liberation</span>
+          </div>
+          <div class="q-body">
+            <h3>Cognitive Empathy</h3>
+            <p>Can you see their frailty, woundedness, or fallibility without excusing harm?</p>
+          </div>
+          <div class="slider-container">
+            <div class="slider-labels-row">
+              <span>0 (Irredeemable monster)</span>
+              <span>10 (Flawed human being)</span>
+            </div>
+            <div class="slider-track-row">
+              <input type="range" id="sq-empathy" min="0" max="10" step="0.1" value="5" class="slider-pos">
+              <span class="val-badge" id="sq-empathy-val">5.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5: Self-Grace -->
+        <div class="question-card">
+          <div class="q-badge-row">
+            <span class="q-number">5</span>
+            <span class="q-category pos">Liberation</span>
+          </div>
+          <div class="q-body">
+            <h3>Self-Grace & Wisdom</h3>
+            <p>Are you releasing self-blame and extracting deeper resilience from this?</p>
+          </div>
+          <div class="slider-container">
+            <div class="slider-labels-row">
+              <span>0 (Blaming myself)</span>
+              <span>10 (Complete self-compassion)</span>
+            </div>
+            <div class="slider-track-row">
+              <input type="range" id="sq-growth" min="0" max="10" step="0.1" value="5" class="slider-pos">
+              <span class="val-badge" id="sq-growth-val">5.0</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: PRO MASTER COCKPIT (15 FACTORS) -->
+    <section id="tab-pro" class="tab-content">
+      <div class="pro-toolbar">
+        <div class="preset-group">
+          <label for="scenario-preset">Context Scenario Preset:</label>
+          <select id="scenario-preset" class="select-input">
+            <option value="custom">Standard (Balanced Baseline)</option>
+            <option value="breakup">Relationship Breakup / Toxic Ex</option>
+            <option value="betrayal">Deep Betrayal (Friend or Partner)</option>
+            <option value="self">Self-Forgiveness (Guilt & Regret)</option>
+            <option value="workplace">Workplace Slights & Rivalry</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="save-session-btn">💾 Save Reflection</button>
+      </div>
+
+      <div class="cockpit-grid">
+        <!-- Positive Column -->
+        <div class="factor-column">
+          <div class="col-headline">
+            <h3><span style="color:var(--pos-green);">✨</span> Positive Factors (Numerator)</h3>
+            <p>Cultivating these elevates your score and releases chronic cortisol.</p>
+          </div>
+          <div id="positive-factors-list"></div>
+        </div>
+
+        <!-- Negative Column -->
+        <div class="factor-column">
+          <div class="col-headline">
+            <h3><span style="color:var(--alert-rose);">⚡</span> Negative Factors (Denominator)</h3>
+            <p>Reducing these removes toxic weight from the denominator of your mind.</p>
+          </div>
+          <div id="negative-factors-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RADAR MAP VISUALIZATION -->
+    <section id="tab-radar" class="tab-content">
+      <div class="view-header">
+        <h2>Multi-Dimensional Emotional Balance Map</h2>
+        <p>A multi-axis geometric mapping of positive emotional strengths versus negative friction.</p>
+      </div>
+
+      <div class="radar-container-card">
+        <div class="radar-legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background:var(--pos-green)"></span>
+            <span>Positive Facilitators (Empathy & Peace)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:var(--alert-rose)"></span>
+            <span>Negative Load (Resentment & Pain)</span>
+          </div>
+        </div>
+        <div class="radar-canvas-wrap">
+          <canvas id="radar-canvas"></canvas>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); text-align:center;">
+          The greater the green area relative to the red perimeter, the higher your psychological liberation.
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 4: JOURNEY HISTORY -->
+    <section id="tab-history" class="tab-content">
+      <div class="view-header">
+        <h2>Your Healing Trajectory</h2>
+        <p>All reflections are encrypted and saved solely on your device. Zero cloud snooping.</p>
+      </div>
+
+      <div class="history-section-wrap">
+        <div id="history-timeline-list"></div>
+      </div>
+    </section>
+
+    <!-- PSYCHOLOGICAL ROADMAP & SENSITIVITY (ALWAYS RELEVANT) -->
+    <section class="analysis-section" style="margin-top: 32px;">
+      <div class="view-header">
+        <h2>Psychological Insights & Recommendations</h2>
+        <p>Scientifically validated intervention priorities tailored to your current inputs.</p>
+      </div>
+
+      <div class="plan-grid">
+        <!-- Friction Blocks -->
+        <div class="plan-card blocks-card">
+          <h3 style="font-size:16px; font-weight:700; color:var(--alert-rose);">Top 3 Emotional Blocks</h3>
+          <div class="plan-items-list" id="top-blocks-items"></div>
+        </div>
+
+        <!-- Growth Facilitators -->
+        <div class="plan-card growth-card">
+          <h3 style="font-size:16px; font-weight:700; color:var(--pos-green);">Top 3 Growth Levers</h3>
+          <div class="plan-items-list" id="top-growth-items"></div>
+        </div>
+      </div>
+
+      <!-- Simulator Box -->
+      <div class="simulator-box">
+        <div class="sim-icon">💡</div>
+        <div class="sim-text">
+          <h4 id="simulator-headline">Sensitivity What-If Simulator</h4>
+          <p id="simulator-text">Calculating optimal release trajectory...</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Include noUiSlider JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
+  <!-- PRO UPGRADE & ACTIVATION MODAL -->
+  <div class="modal-overlay" id="pro-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="close-pro-modal-btn">✕</button>
+      
+      <div style="text-align:center;">
+        <span style="font-size:36px;">🕊️</span>
+        <h2 style="font-size:22px; margin-top:8px;">AuraForgive Pro</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">One-time lifetime unlock • Zero subscriptions • Ad-free forever</p>
+      </div>
+
+      <ul class="pro-perks-list">
+        <li><strong>Full 15-Factor Cockpit:</strong> Granular weight & intensity controls</li>
+        <li><strong>Multi-Factor Radar Map:</strong> Full high-res visual balance mapping</li>
+        <li><strong>Sensitivity Simulator:</strong> Real-time "What-If" trajectory modeling</li>
+        <li><strong>Unlimited Journey Tracking:</strong> Encrypted local offline timeline</li>
+        <li><strong>Clinical PDF Export:</strong> Printable reports for therapy or journaling</li>
+      </ul>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a href="https://gumroad.com" target="_blank" class="btn-gold" style="text-decoration:none;">
+          <span>Get Lifetime Pro ($4.99)</span>
+        </a>
+        <p style="font-size:11px; text-align:center; color:var(--text-dim);">Processed securely via Gumroad/LemonSqueezy. No developer fees.</p>
+      </div>
+
+      <div style="border-top:1px solid var(--border-subtle); padding-top:14px;">
+        <label style="font-size:12px; font-weight:600; color:var(--text-muted); display:block; margin-bottom:6px;">Have an Activation Code?</label>
+        <div class="license-input-wrap">
+          <input type="text" id="license-key-input" class="text-input" placeholder="e.g. AURA-PRO-XXXX">
+          <button class="btn-primary" id="activate-license-btn">Activate</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <button class="btn-secondary" id="demo-pro-toggle" style="width:100%; font-size:12px;">Toggle Free Pro Demo (For Testing)</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
